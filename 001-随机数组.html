@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+<input type="button" value="生成5个随机数" class="btn1">
+<p class="arr"></p>
+	<script>
+		// 创建数组变量
+		var arr = [];
+		document.querySelector('.btn1').onclick = function () {	
+		for (var i = 0; i<5; i++) {
+			// 生成5个随机数
+			var num = Math.floor(Math.random()*100);
+			// 将随机数加入数组
+			arr[arr.length] = num;
+		}
+		// 将数组加入p标签
+		document.querySelector('.arr').innerHTML = 'arr=['+arr+']';
+		}
+	</script>
+</body>
+</html>

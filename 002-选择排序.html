@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+<input type="button" value="生成5个随机数" class="btn1">
+<input type="button" value="排序" class="btn2">
+<p class="oldArr"></p>
+<p class="newArr"></p>
+	<script>
+		// 创建数组变量
+		var arr;
+		document.querySelector('.btn1').onclick = function () {	
+			arr = [];
+		for (var i = 0; i<5; i++) {
+			// 生成5个随机数
+			var num = Math.floor(Math.random()*100);
+			// 将随机数加入数组
+			arr[arr.length] = num;
+		}
+		// 将数组加入p标签
+		document.querySelector('.oldArr').innerHTML = 'arr=['+arr+']';
+		}
+		// 进行排序
+		document.querySelector('.btn2').onclick = function () {
+			for (var i = 0; i < arr.length-1; i++) {
+				for (var j = i+1; j < arr.length; j++) {
+					if(arr[i]>arr[j]){
+						var temp = arr[i];
+						arr[i] = arr[j];
+						arr[j] = temp;
+					}
+				}
+			}
+			document.querySelector('.newArr').innerHTML = 'arr=['+arr+']';
+		}
+
+	</script>
+</body>
+</html>
