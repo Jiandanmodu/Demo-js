@@ -1,0 +1,26 @@
+//点击树节点，选中节点的所有叶子节点
+function treenodeClick(event, treeId, treeNode, clickFlag) { 
+    //此处treeNode 为当前节点 
+     var str ='' ; 
+     if(treeNode.isParent){
+         str = getAllChildrenNodes(treeNode,str);
+     }else{
+       zTree.selectNode(treeNode);
+     }
+}
+ 
+//递归，得到叶子节点的数据
+function getAllChildrenNodes(treeNode,result){ 
+    if (treeNode.isParent) { 
+      var childrenNodes = treeNode.children; 
+      if (childrenNodes) { 
+          for (var i = 0; i < childrenNodes.length; i++) { 
+           if(childrenNodes[i].isParent){
+            getAllChildrenNodes(childrenNodes[i], result); 
+           }else{
+            zTree.selectNode(childrenNodes); 
+           }
+          } 
+      } 
+  } 
+}
