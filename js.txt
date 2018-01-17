@@ -1,0 +1,41 @@
+
+        $(document).ready(function () {
+            var spread = new GC.Spread.Sheets.Workbook(document.getElementById("ss"));
+			spread.fromJSON(jsonData);
+            var excelIo = new GC.Spread.Excel.IO();
+            var sheet = spread.getActiveSheet();
+            $("#loadExcel").click(function () {
+                var excelFile = document.getElementById("fileDemo").files[0];
+                var password = $("#password").val();
+                // here is excel IO API
+                excelIo.open(excelFile, function (json) {
+                    var workbookObj = json;
+                    spread.fromJSON(workbookObj);
+                }, function (e) {
+                    // process error
+                    alert(e.errorMessage);
+                    if (e.errorCode === 2/*noPassword*/  || e.errorCode === 3 /*invalidPassword*/) {
+                        $("#password").select();
+                    }
+                }, {password: password});
+            });
+            $("#saveExcel").click(function () {
+
+                var fileName = $("#exportFileName").val();
+                var password = $("#password").val();
+                if (fileName.substr(-5, 5) !== '.xlsx') {
+                    fileName += '.xlsx';
+                }
+
+                var json = spread.toJSON();
+
+                // here is excel IO API
+                excelIo.save(json, function (blob) {
+                    saveAs(blob, fileName);
+                }, function (e) {
+                    // process error
+                    console.log(e);
+                }, {password: password});
+
+            });
+        });
